@@ -49,5 +49,16 @@ let toUpperCase;
 
 
 // 텍스트 이름 변환 유틸리티 함수
-let toCamelCase;
-let toPascalCase;
+//? (\s|-|_)+. : 여기서 . 은 앞에 찾은 단어의 뒤에 단어를 의미. replace는 callback 함수 받을 수 있다.
+function toCamelCase(string) {
+    return string.replace(/(\s|-|_)+./g, ($1) => $1.trim().replace(/(-|_)+/, '').toUpperCase())
+  }
+  
+  function toPascalCase(string) {
+    let name = toCamelCase(string);
+    return name[0].toUpperCase() + name.slice(1); //^ 1번째부터 복사
+  }
+  
+  // let toCamelCase;
+  
+  // let toPascalCase;

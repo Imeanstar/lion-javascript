@@ -77,6 +77,7 @@ arr.forEach(() => {
 */
 arr.forEach((item , index) => {
     console.log(item, index);
+    console.log(1);
 })
 
 people.forEach((item) => {
@@ -105,7 +106,7 @@ console.log(newArray1);
 
 // slice
 
-const slice = arr.slice(2,5);
+const slice = arr.slice(1,5);
 
 // toSorted
 const tosorted = arr.toSorted((a,b) => {
