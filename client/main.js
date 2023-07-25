@@ -1,11 +1,16 @@
 
-import { attr, clearContents, diceAnimation, endScroll, getNode, getNodes, insertLast } from './lib/index.js'
+import { attr, clearContents, diceAnimation, endScroll, getNode, getNodes, insertLast, memo } from './lib/index.js'
 
 const[startButton, recordButton, resetButton] = getNodes('.buttonGroup > button');
 const buttonGroup = getNode('.buttonGroup');
 const recordListWrapper = getNode('.recordListWrapper');
 const tbody = getNode('.recordList tbody');
-const body = getNode('body');
+const body = getNode('.body');
+
+memo('@tbody', ()=> getNode('.recordList body')); //setter
+
+// memo('@tbody'); //getter
+
 
 let turn = 0;
 let sum = 0;
@@ -40,13 +45,14 @@ function createItem(value){
 
 
 function renderRecodrItem(){
-    const diceValue = +attr('#cube', 'data-dice');
+    const diceValue = +attr(memo('cube'), 'data-dice');
     sum += diceValue;
 
-    insertLast(tbody, createItem(diceValue));
+    insertLast(memo('@tbody'), createItem(diceValue));
 
-    // endScroll(body);
+    
     endScroll(recordListWrapper);
+    endScroll(body);
 }
 
 
@@ -89,7 +95,7 @@ function recordHandle(){
 
     
     turn++;
-
+    
     renderRecodrItem()
     
 }
@@ -99,7 +105,7 @@ function recordHiddenOn(){
     recordButton.disabled = true;
     resetButton.disabled = true;
 
-    clearContents(tbody);
+    clearContents(memo('@tbody'));
 
     turn = 0;
     sum = 0;
@@ -109,3 +115,5 @@ function recordHiddenOn(){
 startButton.addEventListener('click', diceRollEvent);
 recordButton.addEventListener('click', recordHandle);
 resetButton.addEventListener('click', recordHiddenOn);
+
+

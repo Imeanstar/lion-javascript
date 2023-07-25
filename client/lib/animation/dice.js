@@ -1,5 +1,6 @@
 import { attr } from "../dom/attr.js";
 import { getNode } from '../dom/getNode.js'
+import {memo } from '../utils/memo.js';
 // import {gsap} from "../../../node_modules/gsap/index.js";
 
 /*global gsap*/
